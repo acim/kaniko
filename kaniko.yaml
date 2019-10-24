@@ -6,16 +6,13 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:latest
-    args: ["--context=git@github.com:acim/kaniko.git",
-            "--destination=acim/kaniko"]
-    # volumeMounts:
-    #   - name: kaniko-secret
-    #     mountPath: /secret
-    # env:
-    #   - name: GOOGLE_APPLICATION_CREDENTIALS
-    #     value: /secret/kaniko-secret.json
+    args: ["--context=git://github.com/acim/kaniko.git",
+            "--destination=acim/kaniko:latest"]
+    volumeMounts:
+      - name: kaniko-secret
+        mountPath: /kaniko/.docker
   restartPolicy: Never
-  # volumes:
-  #   - name: kaniko-secret
-  #     secret:
-  #       secretName: kaniko-secret
+  volumes:
+    - name: kaniko-secret
+      secret:
+        secretName: dockerhub
