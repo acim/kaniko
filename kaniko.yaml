@@ -6,13 +6,18 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:latest
-    args: ["--context=git://github.com/acim/kaniko.git",
-            "--destination=acim/kaniko:latest"]
+    args: 
+    - --context=git://github.com/acim/kaniko.git
+    - --destination=acim/kaniko:latest
     volumeMounts:
       - name: kaniko-secret
         mountPath: /kaniko/.docker
+        readOnly: true
   restartPolicy: Never
   volumes:
     - name: kaniko-secret
       secret:
         secretName: dockerhub
+        items:
+        - key: .dockerconfigjson
+          path: config.json
