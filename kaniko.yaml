@@ -21,7 +21,7 @@ spec:
       volumes:
         - name: kaniko-secret
           secret:
-            secretName: dockerhub
+            secretName: dockerhub-registry
             items:
             - key: .dockerconfigjson
               path: config.json
