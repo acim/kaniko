@@ -1,3 +1,4 @@
 FROM busybox
 
-RUN echo "Hello from Kaniko"
+ENTRYPOINT ["echo"]
+CMD ["Hello from Kaniko job"]
